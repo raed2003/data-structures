@@ -1,0 +1,46 @@
+program DetermineOrthogonalVectors;
+
+ type
+  RealArray = array of real;
+
+ procedure dot_product(v1, v2: RealArray; var ps: real);
+ var
+  i: integer;
+ begin
+  ps := 0;
+
+  if Length(v1) = Length(v2) then
+  begin
+    for i := 0 to Length(v1) - 1 do
+      ps := ps + v1[i] * v2[i];
+  end
+  else
+    writeln( Error: Vectors must have the same length.);
+ end;
+
+ function areOrthogonal(v1, v2: RealArray): boolean;
+ var
+  result: real;
+ begin
+  dot_product(v1, v2, result);
+  areOrthogonal := abs(result) < 1e-10; 
+ end;
+ var
+  v1, v2: RealArray;
+  i: integer;
+ begin
+  SetLength(v1, 3);
+  SetLength(v2, 3);
+  v1[0] := 1; v1[1] := 0; v1[2] := 0; 
+  v2[0] := 0; v2[1] := 1; v2[2] := 0; 
+
+  if areOrthogonal(v1, v2) then
+    writeln( Vectors are orthogonal)
+  else
+    writeln( Vectors are not orthogonal);
+end.
+
+
+
+
+

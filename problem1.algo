@@ -1,0 +1,51 @@
+program FindDistinctSum;
+
+type
+  IntArray = array of Integer;
+
+function FindDistinctSum(set1, set2: IntArray): Integer;
+ var
+  distinctElements: IntArray;
+  element, sum: Integer;
+  i, j: Integer;
+ begin
+  SetLength(distinctElements, 0);
+  sum := 0;
+  for i := 0 to Length(set1) - 1 do
+  begin
+    element := set1[i];
+    if not (element in distinctElements) then
+    begin
+      SetLength(distinctElements, Length(distinctElements) + 1);
+      distinctElements[Length(distinctElements) - 1] := element;
+    end;
+  end;
+  for i := 0 to Length(set2) - 1 do
+  begin
+    element := set2[i];
+    if not (element in distinctElements) then
+    begin
+      SetLength(distinctElements, Length(distinctElements) + 1);
+      distinctElements[Length(distinctElements) - 1] := element;
+    end;
+  end;
+  for i := 0 to Length(distinctElements) - 1 do
+  begin
+    sum := sum + distinctElements[i];
+  end;
+
+  FindDistinctSum := sum;
+ end;
+
+ var
+  set1, set2: IntArray;
+  result: Integer;
+  i: Integer;
+
+ begin
+
+  set1 := IntArray.Create(3, 1, 7, 9);
+  set2 := IntArray.Create(2, 4, 1, 9, 3);
+  result := FindDistinctSum(set1, set2);
+  writeln(Output: , result);
+ end.
